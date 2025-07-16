@@ -1,0 +1,74 @@
+<div class="container mt-5" *ngIf="!flag">
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%; border-radius: 1rem;">
+      <div class="text-center mb-4">
+        <i class="bi bi-person-circle fs-1 text-primary"></i>
+        <h4 class="mt-2">Iniciar Sesión</h4>
+      </div>
+      <form (ngSubmit)="loginUsuario()">
+        <div class="mb-3">
+          <label for="usuario" class="form-label">Usuario</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <input type="text" id="usuario" class="form-control" [(ngModel)]="modeloUsuario.usuario" name="usuario" placeholder="Ingrese su usuario">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="password" class="form-label">Contraseña</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+            <input type="password" id="password" class="form-control" [(ngModel)]="modeloUsuario.password" name="password" placeholder="Ingrese su contraseña">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div *ngIf="flag">
+  <!-- NAVBAR FIJA Y RESPONSIVE -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+    <div class="container-fluid px-4 py-2">
+
+      <!-- Marca o título -->
+      <a class="navbar-brand fw-bold text-primary" href="#">TiendaApiREST</a>
+
+      <!-- Botón hamburguesa -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarOpciones" aria-controls="navbarOpciones" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Contenido colapsable -->
+      <div class="collapse navbar-collapse justify-content-between" id="navbarOpciones">
+
+        <!-- Opciones (izquierda) -->
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn btn-outline-primary px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Opciones
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="listEmp">Empleados</a></li>
+              <li><a class="dropdown-item" href="listPais">Países</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Botón cerrar sesión (derecha) -->
+        <form (ngSubmit)="cerrarSesion()" class="d-flex">
+          <button type="submit" class="btn btn-danger d-flex align-items-center">
+            <i class="bi bi-box-arrow-right me-2"></i> Cerrar Sesión
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- ESPACIO PARA QUE NO SE SUPERPONGA EL CONTENIDO -->
+  <div style="margin-top: 80px;"></div>
+</div>
+
+
+
+<router-outlet />

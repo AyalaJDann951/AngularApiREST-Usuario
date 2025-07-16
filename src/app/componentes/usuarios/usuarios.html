@@ -1,0 +1,63 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 mb-4">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">{{ flag ? 'Editar Usuario' : 'Crear Usuario' }}</h4>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="grabarUsuario(modeloUsuario)">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="usuario" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="usuario" [(ngModel)]="modeloUsuario.usuario" name="usuario" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" [(ngModel)]="modeloUsuario.password" name="password" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <input type="text" class="form-control" id="estado" [(ngModel)]="modeloUsuario.estado" name="estado" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success">
+              {{ flag ? 'Actualizar' : 'Grabar' }}
+            </button>
+            <button type="button" class="btn btn-secondary ms-2" (click)="cancelar()">Cancelar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mb-3">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Buscar usuario..." [(ngModel)]="terminoBusqueda" name="terminoBusqueda" (input)="buscarUsuario()">
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="table-responsive shadow-sm">
+        <table class="table table-bordered table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Usuario</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let us of usuariosFiltrados">
+                <th scope="row">{{ us.idusuario }}</th>
+                <td>{{ us.usuario }}</td>
+                <td>{{ us.estado }}</td>
+                <td>
+                  <button class="btn btn-outline-info btn-sm me-2" *ngIf="us.idusuario !== null"  (click)="obtenerUsuario(us.idusuario)">Editar</button>
+                  <button class="btn btn-outline-danger btn-sm" *ngIf="us.idusuario !== null" (click)="eliminarUsuario(us.idusuario)">Eliminar</button>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

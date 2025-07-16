@@ -1,0 +1,53 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 mb-4">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">{{ flag ? 'Editar País' : 'Crear País' }}</h4>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="grabarPais(modeloPais)">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" [(ngModel)]="modeloPais.pais" name="pais" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success">
+              {{ flag ? 'Actualizar' : 'Grabar' }}
+            </button>
+            <button type="button" class="btn btn-secondary ms-2" (click)="cancelar()">Cancelar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mb-3">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Buscar país..." [(ngModel)]="terminoBusqueda" name="terminoBusqueda" (input)="buscarPais()">
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="table-responsive shadow-sm">
+        <table class="table table-bordered table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">País</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of paisesFiltrados">
+              <th scope="row">{{ p.idpais }}</th>
+              <td>{{ p.pais }}</td>
+              <td>
+                <button class="btn btn-outline-info btn-sm me-2" *ngIf="p.idpais !== null" (click)="obtenerPais(p.idpais)">Editar</button>
+                <button class="btn btn-outline-danger btn-sm" *ngIf="p.idpais !== null" (click)="eliminarPais(p.idpais)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
